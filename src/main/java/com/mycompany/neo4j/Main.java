@@ -9,8 +9,7 @@ import java.util.Scanner;
  * @author Matheus Patrick
  */
 public class Main {
-    public static void init() throws InterruptedException, ParseException, SQLException {
-        Database db = new Database();        
+    public static void init(Database db) throws InterruptedException, ParseException, SQLException {
         System.out.println("\n Rede Social ");
         System.out.println("1 - Criar usuario");  
         System.out.println("2 - Cadastro de amizade");  
@@ -25,42 +24,38 @@ public class Main {
         SocialNetwork SN = new SocialNetwork();
 
         switch (opcao) {	
-                case 1:
-                        SN.createUser(db);
-                        break;	
-                case 2:
-                        SN.createFriendship(db);
-                        break;	
-//			case 3:
-//				SN.updateUser();
-//				break;	
-                case 4:
-                        SN.deleteFriendship(db);
-                        break;
-                case 5:
-                        SN.deleteUser(db);
-                        break;
-//			case 6:	
-//				SN.getFriends();
-//				break;			
-                case 0:
-                        System.exit(0);		
-                case 11:
-                         db.endConnection();
-                         break;
-                default:
-                        System.out.println("Por favor, digite uma opcao valida!");
-                        init();
-                        break;
+            case 1:
+                SN.createUser(db);
+                break;	
+            case 2:
+                SN.createFriendship(db);
+                break;	
+            case 3:
+                SN.updateUser(db);
+                break;	
+            case 4:
+                SN.deleteFriendship(db);
+                break;
+            case 5:
+                SN.deleteUser(db);
+                break;
+            case 6:	
+                SN.getFriends(db);
+                break;
+            case 0:
+                db.endConnection();
+                System.exit(0);
+                return;
+            default:
+                System.out.println("Por favor, digite uma opcao valida!");
+                break;
         }
+        if(opcao!=0) init(db);
     }
 
-	public static void main(String[] args) throws InterruptedException, SQLException {
-		try {
-			init();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-	}
+    public static void main(String[] args) throws InterruptedException, SQLException, ParseException {
+        Database db = new Database();
+        init(db);
+    }
 
 }

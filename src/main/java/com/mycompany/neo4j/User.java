@@ -23,24 +23,6 @@ public final class User {
         if(birthDate!=null)
             this.setBirthDate(birthDate);
     }
-   
-//   public void getFriends() throws SQLException, InterruptedException, ParseException {
-//  	Connection c = BDConexao.conectar();
-//   	PreparedStatement st = c.prepareStatement("SELECT P.nome FROM amigos A "
-//   			+ "INNER JOIN pessoas P ON A.amigo2 = P.email "
-//   			+ "WHERE A.amigo2 IN "
-//   			+ "(SELECT amigo2 FROM amigos WHERE amigo1 = '"+this.email+"')"); //todo MAX 1
-//   	
-//   	ResultSet rs = st.executeQuery();
-//   	System.out.println("Amigos do usuario com e-mail ("+this.email+"): \n");
-//   	while (rs.next())
-//   	{
-//   		System.out.println(rs.getString(1));
-//   	}
-//   	rs.close();
-//   	st.close();
-//   	Interface.init();
-//   };
 
    public String getName() {
        return name;
