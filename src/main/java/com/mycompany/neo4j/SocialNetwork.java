@@ -6,6 +6,10 @@ import java.util.Scanner;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 
+/**
+ * @author Caroline Heloisa
+ * @author Matheus Patrick
+ */
 public class SocialNetwork {
     public void createUser(Database db) throws InterruptedException, ParseException, SQLException{
     	Scanner scanner = new Scanner(System.in);

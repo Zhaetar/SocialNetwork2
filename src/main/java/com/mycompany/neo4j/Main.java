@@ -5,7 +5,7 @@ import java.text.ParseException;
 import java.util.Scanner;
 
 /**
- * @author Carol Heloisa
+ * @author Caroline Heloisa
  * @author Matheus Patrick
  */
 public class Main {

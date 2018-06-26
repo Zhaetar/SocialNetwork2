@@ -3,6 +3,10 @@ package com.mycompany.neo4j;
 import java.sql.SQLException;
 import java.text.ParseException;
 
+/**
+ * @author Caroline Heloisa
+ * @author Matheus Patrick
+ */
 public final class User { 
    protected String name;
    protected String email;
@@ -23,45 +27,5 @@ public final class User {
         if(birthDate!=null)
             this.setBirthDate(birthDate);
     }
-
-   public String getName() {
-       return name;
-   }
-   
-   public void setName(String name) {
-       this.name = name;
-   }
-   
-   public String getEmail() {
-       return email;
-   }   
-   
-   public void setEmail(String email) {
-       this.email = email;
-   }
-   
-   public String getBirthTown() {
-       return birthTown;
-   }
-   
-   public void setBirthTown(String birthTown) {
-       this.birthTown = birthTown;
-   }
-   
-   public String getLivingTown() {
-       return livingTown;
-   }
-   
-   public void setLivingTown(String livingTown) {
-       this.livingTown = livingTown;
-   }
-   
-   public String getBirthDate() {
-       return birthDate;
-   }
-   
-   public void setBirthDate(String birthDate) {
-       this.birthDate = birthDate;
-   }
    
 }

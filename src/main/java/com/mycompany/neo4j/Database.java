@@ -13,8 +13,8 @@ import org.neo4j.graphdb.index.IndexManager;
 import org.neo4j.graphdb.index.RelationshipIndex;
 
 /**
- *
- * @author Caroline, Matheus
+ * @author Caroline Heloisa
+ * @author Matheus Patrick
  */
 public class Database {
     GraphDatabaseFactory factory;
@@ -46,6 +46,8 @@ public class Database {
     public enum RelationType  implements RelationshipType {
         Friend;
     }
+    
+    // ------------------------ PERSONS ------------------------ //
     
     public void insertPerson(User user) {
         try(Transaction tx = db.beginTx()) {
@@ -107,6 +109,8 @@ public class Database {
             tx.success();
         } 
     }
+    
+    // ------------------------ RELATIONSHIPS ------------------------ //
     
     public void createFriendship(Node friend1, Node friend2) {
        try (Transaction tx = db.beginTx()) {
@@ -177,6 +181,8 @@ public class Database {
             System.out.println("\nErro ao remover amizade! Voltando ao menu..");
         }
     }
+    
+    // ------------------------ GETTERS ------------------------ //
     
     public String getPersonEmail(Node person){
         try (Transaction tx = db.beginTx()) {
