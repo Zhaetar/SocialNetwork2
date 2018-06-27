@@ -26,7 +26,12 @@ public class Database {
 
     public Database() {
         factory = new GraphDatabaseFactory();
-        db = factory.newEmbeddedDatabase("/PortableNoSQL/neo4j/data/graph.db");
+        try {
+        	db = factory.newEmbeddedDatabase("/PortableNoSQL/neo4j/data/graph.db");
+        } catch (Exception e) {
+        	System.err.println("ERRO AO CONECTAR AO BANCO DE DADOS, JÁ EXISTE UMA CONEXÃO ATIVA!");
+        	System.exit(0);
+        }
         try(Transaction tx = db.beginTx()) {
             IndexManager index = db.index();
             persons = index.forNodes( "Person" );
@@ -34,7 +39,7 @@ public class Database {
             tx.success();
         } catch (Exception e) {
             if(DEBUG) {System.out.println(e);}
-            System.out.println("\nErro ao conectar ao banco de dados..");
+            System.err.println("\nErro ao conectar ao banco de dados..");
         }
     }
     
@@ -68,7 +73,7 @@ public class Database {
             System.out.println("\nPessoa criada com sucesso!");
         } catch (Exception e) {
             if(DEBUG) {System.out.println(e);}
-            System.out.println("\nErro ao inserir usuario! Voltando ao menu..");
+            System.err.println("\nErro ao inserir usuario! Voltando ao menu..");
         }
     }
     public Node getPerson (String email ) {
@@ -92,7 +97,7 @@ public class Database {
             System.out.println("\nUsuario removida com sucesso!");
         } catch (Exception e) {
             if(DEBUG) {System.out.println(e);}
-            System.out.println("\nErro ao remover usuario! Voltando ao menu..");
+            System.err.println("\nErro ao remover usuario! Voltando ao menu..");
         }
     }
     
@@ -123,7 +128,7 @@ public class Database {
             System.out.println("\nAmizade criada com sucesso!");
         } catch (Exception e) {
             if(DEBUG) {System.out.println(e);}
-            System.out.println("\nErro ao criar amizade! Voltando ao menu..");
+            System.err.println("\nErro ao criar amizade! Voltando ao menu..");
         }
     }    
     public Relationship getFriendship (String email1, String email2) {
@@ -151,6 +156,7 @@ public class Database {
     public void getFriends (Node person) {
         try (Transaction tx = db.beginTx()) {
             boolean header = true;
+            int friendsNum = 0;
             for ( Relationship friends : this.friendships.query( "id:*"+person.getProperty("email")+" OR id:"+person.getProperty("email")+"*") ) {
                 if(header) {
                     System.out.println("Estes são os amigos de "+person.getProperty("name")+":");
@@ -161,11 +167,15 @@ public class Database {
                 } else {
                     System.out.println(friends.getStartNode().getProperty("name"));
                 }
+                friendsNum++;
             }
             tx.success();
+            if(friendsNum==0) {
+            	System.err.println("Erro ao encontrar os amigos!");
+            }
         }  catch (Exception e) {
             if(DEBUG) {System.out.println(e);}
-            System.out.println("\nErro ao encontrar amizades! Voltando ao menu..");
+            System.err.println("\nErro ao encontrar amizades! Voltando ao menu..");
         }
     }
     
@@ -177,7 +187,7 @@ public class Database {
             System.out.println("\nSucesso ao deletar amizade!");
         }  catch (Exception e) {
             if(DEBUG) {System.out.println(e);}
-            System.out.println("\nErro ao remover amizade! Voltando ao menu..");
+            System.err.println("\nErro ao remover amizade! Voltando ao menu..");
         }
     }
     
