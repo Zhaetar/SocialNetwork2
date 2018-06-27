@@ -10,7 +10,9 @@ import java.util.Scanner;
  */
 public class Main {
     public static void init(Database db) throws InterruptedException, ParseException, SQLException {
-        System.out.println("\n Rede Social ");
+        System.out.println("------------------------------------------------");
+        System.out.println("Seja bem vindo ao Nexus! O que deseja fazer?");
+        System.out.println("------------------------------------------------");
         System.out.println("1 - Criar usuario");  
         System.out.println("2 - Cadastro de amizade");  
         System.out.println("3 - Alteracao de dados de usuario");                              
@@ -18,6 +20,7 @@ public class Main {
         System.out.println("5 - Remocao de pessoas");	
         System.out.println("6 - Buscar todos os amigos de primeiro grau de uma pessoa");
         System.out.println("0 - Sair do Programa");
+        System.out.println("------------------------------------------------");
 
         Scanner scanner = new Scanner(System.in);
         int opcao = scanner.nextInt();
@@ -43,7 +46,9 @@ public class Main {
                 SN.getFriends(db);
                 break;
             case 0:
-                db.endConnection();
+            	System.out.println("------------------------------------------------");
+                System.out.println("Obrigado por utilizar o Nexus, tenha um ótimo dia!");
+            	System.out.println("------------------------------------------------");
                 System.exit(0);
                 return;
             default:
@@ -57,5 +62,4 @@ public class Main {
         Database db = new Database();
         init(db);
     }
-
 }

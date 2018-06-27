@@ -1,8 +1,5 @@
 package com.mycompany.neo4j;
 
-import java.sql.SQLException;
-import java.text.ParseException;
-
 /**
  * @author Caroline Heloisa
  * @author Matheus Patrick
@@ -15,17 +12,17 @@ public final class User {
    protected String livingTown;
  
   
-   public User (String name, String email, String birthTown, String livingTown, String birthDate ) throws InterruptedException, ParseException, SQLException {
+   public User (String name, String email, String birthTown, String livingTown, String birthDate ) {
         if(!"".equals(email) && email!=null)
-            this.setEmail(email);
+            this.email = email;
         if(!"".equals(name) && name!=null)
-            this.setName(name);
+            this.name = name;
         if(!"".equals(birthTown) && birthTown!=null)
-            this.setBirthTown(birthTown);
+            this.birthTown = birthTown;
         if(!"".equals(livingTown) && livingTown!=null)
-            this.setLivingTown(livingTown);
+            this.livingTown = livingTown;
         if(birthDate!=null)
-            this.setBirthDate(birthDate);
+            this.birthDate = birthDate;
     }
    
 }

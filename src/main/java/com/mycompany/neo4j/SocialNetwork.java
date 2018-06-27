@@ -1,5 +1,6 @@
 package com.mycompany.neo4j;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Scanner;
@@ -12,6 +13,10 @@ import org.neo4j.graphdb.Relationship;
  */
 public class SocialNetwork {
     public void createUser(Database db) throws InterruptedException, ParseException, SQLException{
+    	System.out.println("------------------------------------------------");
+        System.out.println("Módulo de criação de usuário iniciado,");
+        System.out.println("por favor insira a seguir os dados do usuário a ser cadastrado");
+    	System.out.println("------------------------------------------------");
     	Scanner scanner = new Scanner(System.in);
         System.out.println("Digite o email: ");
         String email = scanner.next();
@@ -37,8 +42,12 @@ public class SocialNetwork {
         Main.init(db);
 	}
     
-    public void updateUser(Database db) throws InterruptedException, ParseException, SQLException {;
-    	String email = getEmail();
+    public void updateUser(Database db) throws InterruptedException, ParseException, SQLException {
+    	System.out.println("------------------------------------------------");
+        System.out.println("Módulo de alteração de usuário iniciado,");
+        System.out.println("por favor insira a seguir os dados do usuário a ser alterado");
+    	System.out.println("------------------------------------------------");
+        String email = getEmail();
     	int exit = 0;
     	Scanner scanner = new Scanner(System.in);
         String newEmail, newName, newBirthTown, newLivingTown, newBirthDate;
@@ -56,8 +65,8 @@ public class SocialNetwork {
         newBirthDate  = db.getPersonBirthDate(person);
     	
     	while(exit!=1) {
-            System.out.println("O que voce deseja alterar? ");
-            System.out.println("1-  Email");  
+            System.out.println("\nO que voce deseja alterar? ");
+            System.out.println("\n1-  Email");  
             System.out.println("2-  Nome");                              
             System.out.println("3 - Cidade de Nascimento"); 
             System.out.println("4-  Cidade de Residencia");	
@@ -101,9 +110,9 @@ public class SocialNetwork {
         }
         User user = new User(newName, newEmail, newBirthTown, newLivingTown, newBirthDate);
         db.updatePerson(person, user);
-    };
-    
-    public void deleteUser(Database db) throws InterruptedException, ParseException, SQLException {
+    }
+
+    public void deleteUser(Database db) {
     	String email = getEmail();
     	Node person = db.getPerson(email);
         if (person == null) {
@@ -113,7 +122,7 @@ public class SocialNetwork {
     	db.removePerson(person);
 	}
 
-    public void deleteFriendship(Database db) throws InterruptedException, ParseException, SQLException {
+    public void deleteFriendship(Database db) {
     	String email1 = getEmail();
 	String email2 = getEmail();	
         Relationship friends = db.getFriendship(email1, email2);
@@ -138,7 +147,7 @@ public class SocialNetwork {
         Main.init(db);
 	}
     
-    public void getFriends(Database db) throws InterruptedException, ParseException, SQLException {
+    public void getFriends(Database db) {
     	String email = getEmail();
     	Node person = db.getPerson(email);
         if (person == null) {

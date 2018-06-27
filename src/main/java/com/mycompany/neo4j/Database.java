@@ -21,18 +21,17 @@ public class Database {
     GraphDatabaseService db;
     Index<Node> persons;
     RelationshipIndex friendships;
-    boolean DEBUG = true;
+    boolean DEBUG = false;
     
 
     public Database() {
         factory = new GraphDatabaseFactory();
         db = factory.newEmbeddedDatabase("/PortableNoSQL/neo4j/data/graph.db");
-        try(Transaction tx = db.beginTx();) {
+        try(Transaction tx = db.beginTx()) {
             IndexManager index = db.index();
             persons = index.forNodes( "Person" );
             friendships = index.forRelationships( "Friend" );
             tx.success();
-            System.out.println("\nBanco de dados conectado com sucesso");
         } catch (Exception e) {
             if(DEBUG) {System.out.println(e);}
             System.out.println("\nErro ao conectar ao banco de dados..");
@@ -40,11 +39,11 @@ public class Database {
     }
     
     public enum NodeType implements Label {
-        Person;
+        Person
     }
     
     public enum RelationType  implements RelationshipType {
-        Friend;
+        Friend
     }
     
     // ------------------------ PERSONS ------------------------ //
