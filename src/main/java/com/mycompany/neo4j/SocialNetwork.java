@@ -1,9 +1,9 @@
 package com.mycompany.neo4j;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Scanner;
+
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 
@@ -113,6 +113,10 @@ public class SocialNetwork {
     }
 
     public void deleteUser(Database db) {
+    	System.out.println("------------------------------------------------");
+        System.out.println("Módulo de remoção de usuários iniciado,");
+        System.out.println("por favor insira a seguir os dados dos usuáiro a ser removido.");
+    	System.out.println("------------------------------------------------");
     	String email = getEmail();
     	Node person = db.getPerson(email);
         if (person == null) {
@@ -123,13 +127,23 @@ public class SocialNetwork {
 	}
 
     public void deleteFriendship(Database db) {
+    	System.out.println("------------------------------------------------");
+        System.out.println("Módulo de remoção de amizades iniciado,");
+        System.out.println("por favor insira a seguir os dados dos usuários");
+        System.out.println("para a remoção de amizade.");
+    	System.out.println("------------------------------------------------");
     	String email1 = getEmail();
-	String email2 = getEmail();	
+    	String email2 = getEmail();	
         Relationship friends = db.getFriendship(email1, email2);
     	db.removeFriendship(friends);
 	}
     
     public void createFriendship(Database db) throws InterruptedException, ParseException, SQLException {
+    	System.out.println("------------------------------------------------");
+        System.out.println("Módulo de criação de amizades iniciado,");
+        System.out.println("por favor insira a seguir os dados dos usuários");
+        System.out.println("para a criação de amizade.");
+    	System.out.println("------------------------------------------------");
     	String email1 = getEmail();
     	String email2 = getEmail(); 
         
@@ -148,6 +162,11 @@ public class SocialNetwork {
 	}
     
     public void getFriends(Database db) {
+    	System.out.println("------------------------------------------------");
+        System.out.println("Módulo de visualização de amizades iniciado,");
+        System.out.println("por favor insira a seguir os dados do usuário");
+        System.out.println("para visualizar suas amizades");
+    	System.out.println("------------------------------------------------");
     	String email = getEmail();
     	Node person = db.getPerson(email);
         if (person == null) {
